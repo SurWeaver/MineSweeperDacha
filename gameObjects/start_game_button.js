@@ -41,8 +41,7 @@ export default class StartGameButton {
 	}
 
 	mouseDown(event) {
-		if (event.x < this.x || event.x > this.x + this.buttonWidth ||
-			event.y < this.y || event.y > this.y + BUTTON_HEIGHT)
+		if (!event.inRect(this.x, this.y, this.buttonWidth, BUTTON_HEIGHT))
 			return;
 
 		if (this.action && typeof this.action == "function")

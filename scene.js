@@ -35,7 +35,7 @@ export class Scene {
 		let actor;
 		for (let i = 0; i < this.allActors.length; i++) {
 			actor = this.allActors[i];
-			if ("mouseDown" in actor)
+			if ("mouseDown" in actor && typeof actor.mouseDown === "function")
 				actor.mouseDown(event);
 		}
 	}

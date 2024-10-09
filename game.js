@@ -3,6 +3,7 @@ import DifficultyChanger from "./gameObjects/difficulty_changer.js";
 import Field from "./gameObjects/field.js";
 import StartGameButton from "./gameObjects/start_game_button.js";
 import { Scene } from "./scene.js";
+import ShortMouseEvent from "./short_mouse_event.js";
 
 export const SCENE_MENU = 0;
 export const SCENE_GAME = 1;
@@ -86,9 +87,8 @@ export const game = {
 function getShortMouseEvent(canvas, mouseEvent) {
 	let rect = canvas.getBoundingClientRect();
 
-	return {
-		x: Math.floor(mouseEvent.clientX - rect.left),
-		y: Math.floor(mouseEvent.clientY - rect.top),
-		buttons: mouseEvent.buttons
-	};
+	return new ShortMouseEvent(
+		Math.floor(mouseEvent.clientX - rect.left),
+		Math.floor(mouseEvent.clientY - rect.top),
+		mouseEvent.buttons);
 }
