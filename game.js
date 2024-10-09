@@ -27,7 +27,7 @@ export const game = {
 	},
 
 	bindInput: function() {
-		this.cvs.addEventListener("mousedown", this.mouseDownHandler);
+		this.cvs.addEventListener("mousedown", (event) => this.mouseDownHandler(event));
 	},
 
 	changeScene: function(scene) {
