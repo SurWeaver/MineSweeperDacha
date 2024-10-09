@@ -1,44 +1,44 @@
 export class Scene {
+	allActors = [];
 	processingActors = [];
 	drawableActors = [];
-	mouseDownActors = [];
 
 	addActor(actor) {
-		if ("draw" in actor)
-			this.drawableActors.push(actor);
+		this.allActors.push(actor);
 
 		if ("process" in actor)
 			this.processingActors.push(actor);
 
-		if ("mouseDownHandler" in actor)
-			this.mouseDownActors.push(actor);
+		if ("draw" in actor)
+			this.drawableActors.push(actor);
 	}
 
 	removeActor(actor) {
 		removeValueFromArrays(actor,
-			this.drawableActors,
+			this.allActors,
 			this.processingActors,
-			this.mouseDownActors);
+			this.drawableActors);
 	}
 
 
 	process(deltaTime) {
-		this.processingActors.forEach((actor) => {
-			actor.process(deltaTime)
-		});
+		for (let i = 0; i < this.processingActors.length; i++)
+			this.processingActors[i].process(deltaTime);
 	}
 
 	draw(ctx) {
-		this.drawableActors.forEach((actor) => {
-			actor.draw(ctx);
-		})
+		for (let i = 0; i < this.drawableActors.length; i++)
+			this.drawableActors[i].draw(ctx);
 	}
 
 	mouseDownHandler(event) {
-
+		let actor;
+		for (let i = 0; i < this.allActors.length; i++) {
+			actor = this.allActors[i];
+			if ("mouseDown" in actor)
+				actor.mouseDown(event);
+		}
 	}
-
-
 }
 
 
