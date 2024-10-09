@@ -13,11 +13,10 @@ const BTN_DECR_BOM = 4;
 const BTN_INCR_BOM = 5;
 
 export default class DifficultyChanger {
-	difficulty = new GameDifficulty(9, 9, 10);
-
-	constructor(x, y) {
+	constructor(x, y, difficulty) {
 		this.x = x;
 		this.y = y;
+		this.difficulty = difficulty;
 	}
 
 	draw(ctx) {
@@ -44,6 +43,12 @@ export default class DifficultyChanger {
 		ctx.fillText(`Заполненность поля: ${(this.difficulty.getBombPercent()*100).toFixed(2)}%`,
 			0, HEIGHT + 20);
 
+		let difficultyIsValid = this.difficulty.isValid();
+
+		let initialStyle = ctx.fillStyle;
+
+		ctx.fillStyle = difficultyIsValid ? "white" : "red";
+
 		ctx.fillText(this.difficulty.isValid()
 			? "Сложность валидна"
 			: "Сложность инвалидна",
@@ -51,6 +56,7 @@ export default class DifficultyChanger {
 
 		ctx.setTransform(initialTransform);
 		ctx.textAlign = initialAlign;
+		ctx.fillStyle = initialStyle;
 	}
 
 	mouseDown(event) {
@@ -62,8 +68,10 @@ export default class DifficultyChanger {
 		let normalizedX = event.x - this.x;
 
 		let changePower = 0;
+		// ЛКМ изменяет значение на 1
 		if (event.buttons & 1)
 			changePower += 1;
+		// ПКМ изменяет значение на 10
 		if (event.buttons & 2)
 			changePower += 10;
 
