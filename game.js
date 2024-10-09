@@ -34,10 +34,26 @@ export const game = {
 	},
 
 	mouseDownHandler: function(event) {
-
+		let newEvent = getShortMouseEvent(this.cvs, event);
+		this.currentScene.mouseDownHandler(newEvent);
 	},
 
-	afterFrameClear: function() {
-		
+	process: function(deltaTime) {
+		this.currentScene.process(deltaTime);
+	},
+
+	draw: function() {
+		this.currentScene.draw(this.ctx);
 	}
 };
+
+
+function getShortMouseEvent(canvas, mouseEvent) {
+	let rect = canvas.getBoundingClientRect();
+
+	return {
+		x: Math.floor(mouseEvent.clientX - rect.left),
+		y: Math.floor(mouseEvent.clientY - rect.top),
+		buttons: mouseEvent.buttons
+	};
+}
