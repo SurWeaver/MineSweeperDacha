@@ -23,6 +23,8 @@ export const game = {
 	customDifficulty: null,
 	selectedDifficulty: DEFAULT_DIFFICULTIES[DIF_BEGINNER],
 
+	initialCanvasSize: null,
+
 
 	initialize: function(canvas, context) {
 		this.cvs = canvas;
@@ -32,6 +34,11 @@ export const game = {
 		this.resetContext();
 
 		this.loadCustomDifficulty();
+
+		this.initialCanvasSize = {
+			x: canvas.width,
+			y: canvas.height
+		};
 
 		this.changeScene(SCENE_MENU);
 	},
@@ -87,6 +94,9 @@ export const game = {
 			);
 
 			this.currentScene.addActor(new DifficultyChanger(20, 300, this.customDifficulty));
+			
+			this.cvs.width = this.initialCanvasSize.x;
+			this.cvs.height = this.initialCanvasSize.y;
 			break;
 
 		case SCENE_GAME:
