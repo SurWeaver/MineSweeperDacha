@@ -28,12 +28,19 @@ export const game = {
 		this.ctx = context;
 
 		this.bindInput();
+		this.resetContext();
 
 		this.changeScene(SCENE_MENU);
 	},
 
 	bindInput: function() {
 		this.cvs.addEventListener("mousedown", (event) => this.mouseDownHandler(event));
+	},
+
+	resetContext: function() {
+		this.ctx.font = "bold 24px Comic Sans MS";
+		this.ctx.textBaseline = "top";
+		this.ctx.fillStyle = "white";
 	},
 
 	changeScene: function(scene) {
@@ -81,8 +88,13 @@ export const game = {
 
 			let flagCounter = new FlagCounter(FIELD_H_OFFSET, 6, this.selectedDifficulty.bombCount, field);
 			this.currentScene.addActor(flagCounter);
+
+			this.cvs.width = field.fieldPixelSize.x + FIELD_H_OFFSET * 2;
+			this.cvs.height = field.fieldPixelSize.y + FIELD_V_OFFSET * 2;
 			break;
 		}
+
+		this.resetContext();
 	},
 
 	mouseDownHandler: function(event) {

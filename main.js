@@ -7,12 +7,6 @@ ctx.imageSmoothingEnabled = false;
 let previousTime = 0, deltaTime = 0;
 
 
-ctx.font = "bold 24px Comic Sans MS";
-ctx.textBaseline = "top";
-
-ctx.fillStyle = "white";
-
-
 game.initialize(canvas, ctx);
 
 
