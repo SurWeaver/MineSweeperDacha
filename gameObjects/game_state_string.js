@@ -1,4 +1,4 @@
-import { GAME_FINISHED, GAME_INITIALIZED, GAME_OVER, GAME_STARTED } from "./field.js";
+import { GAME_FINISHED, GAME_INITIALIZED, GAME_STARTED } from "./field.js";
 
 export default class GameStateString {
 	constructor(field, timer, x, y) {
