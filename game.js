@@ -1,12 +1,17 @@
 import { DEFAULT_DIFFICULTIES, DIF_BEGINNER, DIF_NAME, GameDifficulty } from "./difficulty.js";
 import DifficultyChanger from "./gameObjects/difficulty_changer.js";
 import Field from "./gameObjects/field.js";
+import FlagCounter from "./gameObjects/flag_counter.js";
 import StartGameButton from "./gameObjects/start_game_button.js";
+import Timer from "./gameObjects/timer.js";
 import { Scene } from "./scene.js";
 import ShortMouseEvent from "./short_mouse_event.js";
 
 export const SCENE_MENU = 0;
 export const SCENE_GAME = 1;
+
+const FIELD_H_OFFSET = 12;
+const FIELD_V_OFFSET = 30;
 
 
 export const game = {
@@ -61,10 +66,21 @@ export const game = {
 			);
 
 			this.currentScene.addActor(new DifficultyChanger(20, 300, this.customDifficulty));
-			
 			break;
 
 		case SCENE_GAME:
+			this.currentScene = new Scene();
+
+			let field = new Field(this.selectedDifficulty, [FIELD_H_OFFSET, FIELD_V_OFFSET]);
+			field.createNewField();
+			this.currentScene.addActor(field);
+
+			let timer = new Timer(field.fieldPixelSize.x + FIELD_H_OFFSET, 6);
+			field.setTimer(timer);
+			this.currentScene.addActor(timer);
+
+			let flagCounter = new FlagCounter(FIELD_H_OFFSET, 6, this.selectedDifficulty.bombCount, field);
+			this.currentScene.addActor(flagCounter);
 			break;
 		}
 	},
