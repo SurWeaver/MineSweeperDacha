@@ -1,5 +1,3 @@
-import { GameDifficulty } from "../difficulty.js";
-
 const CHANGER_TEXT = "Изменение своей сложности:";
 
 const WIDTH = 360;
