@@ -10,7 +10,7 @@ export default class FlagCounter {
 
 	draw(ctx) {
 		ctx.drawImage(ITEM_IMG, 0, 0, CELL_SIZE, CELL_SIZE,
-			this.x, this.y, CELL_SIZE, CELL_SIZE);
+			this.x, this.y - 3, CELL_SIZE, CELL_SIZE);
 
 		ctx.fillText(this.bombCount - this.field.flagCount, this.x + CELL_SIZE, this.y);
 	}

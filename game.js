@@ -106,11 +106,11 @@ export const game = {
 			field.createNewField();
 			this.currentScene.addActor(field);
 
-			let timer = new Timer(field.fieldPixelSize.x + FIELD_H_OFFSET, 6);
+			let timer = new Timer(field.fieldPixelSize.x + FIELD_H_OFFSET, 5);
 			field.setTimer(timer);
 			this.currentScene.addActor(timer);
 
-			let flagCounter = new FlagCounter(FIELD_H_OFFSET, 6, this.selectedDifficulty.bombCount, field);
+			let flagCounter = new FlagCounter(FIELD_H_OFFSET, 5, this.selectedDifficulty.bombCount, field);
 			this.currentScene.addActor(flagCounter);
 
 			let gameStateString = new GameStateString(field, timer,
