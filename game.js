@@ -3,6 +3,7 @@ import DifficultyChanger from "./gameObjects/difficulty_changer.js";
 import Field from "./gameObjects/field.js";
 import FlagCounter from "./gameObjects/flag_counter.js";
 import GameStateString from "./gameObjects/game_state_string.js";
+import InGameMenu from "./gameObjects/in_game_menu.js";
 import StartGameButton from "./gameObjects/start_game_button.js";
 import Timer from "./gameObjects/timer.js";
 import { Scene } from "./scene.js";
@@ -105,6 +106,11 @@ export const game = {
 			let field = new Field(this.selectedDifficulty, [FIELD_H_OFFSET, FIELD_V_OFFSET]);
 			field.createNewField();
 			this.currentScene.addActor(field);
+
+			let inGameMenu = new InGameMenu(FIELD_H_OFFSET + field.fieldPixelSize.x / 2, 5,
+				() => this.changeScene(SCENE_MENU),
+				() => this.changeScene(SCENE_GAME));
+			this.currentScene.addActor(inGameMenu);
 
 			let timer = new Timer(field.fieldPixelSize.x + FIELD_H_OFFSET, 5);
 			field.setTimer(timer);
