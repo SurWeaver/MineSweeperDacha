@@ -6,11 +6,23 @@ export default class ShortMouseEvent {
 	}
 
 	isLeft() {
-		return ~~(this.buttons & 1);
+		return this.buttons & 1;
 	}
 
 	isRight() {
-		return ~~(this.buttons & 2);
+		return this.buttons & 2;
+	}
+
+	isOnlyLeft() {
+		return this.isLeft() && !this.isRight();
+	}
+
+	isOnlyRight() {
+		return this.isRight() && !this.isLeft();
+	}
+
+	isLeftAndRight() {
+		return this.isLeft() && this.isRight();
 	}
 
 	inRect(x, y, width, height) {
