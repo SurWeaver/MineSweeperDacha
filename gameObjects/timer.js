@@ -32,4 +32,8 @@ export default class Timer {
 
 		ctx.textAlign = initialAlign;
 	}
+
+	getTime() {
+		return (this.time / 1000).toFixed(3);
+	}
 }

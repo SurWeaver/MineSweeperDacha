@@ -2,6 +2,7 @@ import { DEFAULT_DIFFICULTIES, DIF_BEGINNER, DIF_NAME, GameDifficulty } from "./
 import DifficultyChanger from "./gameObjects/difficulty_changer.js";
 import Field from "./gameObjects/field.js";
 import FlagCounter from "./gameObjects/flag_counter.js";
+import GameStateString from "./gameObjects/game_state_string.js";
 import StartGameButton from "./gameObjects/start_game_button.js";
 import Timer from "./gameObjects/timer.js";
 import { Scene } from "./scene.js";

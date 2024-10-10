@@ -2,10 +2,10 @@ import Cell, { CELL_SIZE, STATE_CLOSED, STATE_FLAGGED, STATE_OPENED } from "./ce
 import { random } from "./random.js";
 
 
-const GAME_INITIALIZED = 0;
-const GAME_STARTED = 1;
-const GAME_FINISHED = 2;
-const GAME_OVER = 3;
+export const GAME_INITIALIZED = 0;
+export const GAME_STARTED = 1;
+export const GAME_FINISHED = 2;
+export const GAME_OVER = 3;
 
 export default class Field {
 	cells = [];
@@ -287,10 +287,12 @@ export default class Field {
 			this.timer.stop();
 			this.drawCellFunction = this.drawGameOverCells;
 			this.disabled = true;
+			console.log("Проигрыш...", this.timer.getTime(), "секунд");
 			break;
 		case GAME_FINISHED:
 			this.timer.stop();
 			this.disabled = true;
+			console.log("Победа!", this.timer.getTime(), "секунд");
 		}
 
 		this.gameState = state;
