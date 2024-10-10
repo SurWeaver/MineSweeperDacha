@@ -99,6 +99,10 @@ export default class DifficultyChanger {
 			this.difficulty.bombCount += changePower;
 			break;
 		}
+
+		localStorage.setItem("customWidth", this.difficulty.width);
+		localStorage.setItem("customHeight", this.difficulty.height);
+		localStorage.setItem("customBomb", this.difficulty.bombCount);
 	}
 
 	getDifficulty() {

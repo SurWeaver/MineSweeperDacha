@@ -20,7 +20,7 @@ export const game = {
 	cvs: null,
 	currentScene: null,
 
-	customDifficulty: new GameDifficulty(9, 9, 10),
+	customDifficulty: null,
 	selectedDifficulty: DEFAULT_DIFFICULTIES[DIF_BEGINNER],
 
 
@@ -30,6 +30,8 @@ export const game = {
 
 		this.bindInput();
 		this.resetContext();
+
+		this.loadCustomDifficulty();
 
 		this.changeScene(SCENE_MENU);
 	},
@@ -42,6 +44,17 @@ export const game = {
 		this.ctx.font = "bold 24px Comic Sans MS";
 		this.ctx.textBaseline = "top";
 		this.ctx.fillStyle = "white";
+	},
+
+	loadCustomDifficulty: function() {
+		let width = Number(localStorage.getItem("customWidth"));
+		let height = Number(localStorage.getItem("customHeight"));
+		let bomb = Number(localStorage.getItem("customBomb"));
+
+		if (width != 0 && height != 0 && bomb != 0)
+			this.customDifficulty = new GameDifficulty(width, height, bomb);
+		else
+			this.customDifficulty = new GameDifficulty(9, 9, 10);
 	},
 
 	changeScene: function(scene) {
@@ -89,6 +102,11 @@ export const game = {
 
 			let flagCounter = new FlagCounter(FIELD_H_OFFSET, 6, this.selectedDifficulty.bombCount, field);
 			this.currentScene.addActor(flagCounter);
+
+			let gameStateString = new GameStateString(field, timer,
+				FIELD_H_OFFSET + field.fieldPixelSize.x / 2,
+				FIELD_V_OFFSET * 1.5 + field.fieldPixelSize.y);
+			this.currentScene.addActor(gameStateString);
 
 			this.cvs.width = field.fieldPixelSize.x + FIELD_H_OFFSET * 2;
 			this.cvs.height = field.fieldPixelSize.y + FIELD_V_OFFSET * 2;
