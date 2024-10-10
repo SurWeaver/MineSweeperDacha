@@ -44,6 +44,9 @@ export default class StartGameButton {
 		if (!event.inRect(this.x, this.y, this.buttonWidth, BUTTON_HEIGHT))
 			return;
 
+		if (!event.isLeft())
+			return;
+
 		if (this.action && typeof this.action == "function")
 			this.action();
 	}
